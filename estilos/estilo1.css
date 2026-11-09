@@ -1,0 +1,218 @@
+/* ===== Reset básico ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #e8e8e8;   /* Fondo gris claro */
+}
+
+/* ===== Contenedor principal (sidebar + contenido) ===== */
+.contenedor {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* ===== BARRA LATERAL ===== */
+.sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    border-right: 2px solid #c0392b;   /* Línea roja divisoria */
+    padding-right: 15px;
+}
+
+.titulo-filtros {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #1a56db;
+    margin-bottom: 15px;
+    text-decoration: underline;
+}
+
+.filtro {
+    margin-bottom: 20px;
+}
+
+.filtro h3 {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.filtro label {
+    display: block;
+    font-size: 0.75rem;
+    color: #333;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.filtro input {
+    margin-right: 5px;
+}
+
+/* Botones de herramientas */
+.herramientas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn-herramienta {
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-herramienta:hover {
+    background-color: #d5e3f5;
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+.contenido {
+    flex: 1;
+}
+
+.resultados-header {
+    margin-bottom: 20px;
+}
+
+.resultados-header h1 {
+    font-size: 1.1rem;
+    color: #1a2a6c;
+    margin-bottom: 5px;
+}
+
+.info-resultados {
+    font-size: 0.75rem;
+    color: #555;
+}
+
+/* ===== TARJETAS DE RESULTADOS ===== */
+.tarjeta {
+    display: flex;
+    background-color: #5f9ea0;    /* Azul verdoso tipo cadetblue */
+    border-radius: 3px;
+    padding: 15px;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.tarjeta-imagen img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border: 1px solid #333;
+    background: #fff;
+}
+
+.tarjeta-titulo {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.tarjeta-titulo a {
+    color: #1a56db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.tarjeta-titulo a:hover {
+    text-decoration: underline;
+}
+
+.tarjeta-descripcion {
+    font-size: 0.78rem;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.tarjeta-meta {
+    font-size: 0.7rem;
+    color: #444;
+    font-style: italic;
+}
+
+/* ===== PAGINACIÓN ===== */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 25px 0;
+}
+
+.btn-pagina {
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pagina:hover {
+    background-color: #d5e3f5;
+}
+
+.btn-pagina.activo {
+    background-color: #1a56db;
+    color: #fff;
+    border-color: #1a56db;
+}
+
+.puntos {
+    color: #555;
+}
+
+/* ===== PIE DE PÁGINA ===== */
+.footer {
+    background-color: #dcdcdc;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.75rem;
+    color: #333;
+}
+.btn-herramienta {
+    display: block;              /* Que ocupen todo el ancho como antes */
+    text-align: center;
+    text-decoration: none;       /* Quitar el subrayado de los enlaces */
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 0.8rem;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-herramienta:hover {
+    background-color: #d5e3f5;
+}
+.buscador {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    transition: transform 0.3s ease;   /* Animación suave al ocultarse */
+}
+
+/* Clase que lo esconde (lo sube fuera de la pantalla) */
+.buscador.oculto {
+    transform: translateY(-150%);
+}

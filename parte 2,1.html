@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Búsqueda | Portal de Proyectos USMP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/esilo5.css">
+</head>
+<body>
+
+    <header class="buscador-wrapper">
+        <div class="buscador-container">
+            <div class="buscador-caja">
+                <span class="icono-lupa">🔍</span>
+                <input type="text" id="input-busqueda" class="buscador-input" 
+                       placeholder="Buscar por título, palabra clave o autor..." value="">
+                <button class="buscador-btn" onclick="buscar()">Buscar</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="contenedor-layout">
+
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="titulo-filtros">Filtros de búsqueda</h2>
+                <button class="btn-limpiar" onclick="limpiarFiltros()">Restablecer</button>
+            </div>
+
+            <section class="filtro-grupo">
+                <h3 class="filtro-titulo">Carrera / Especialidad</h3>
+                <label class="filtro-opcion">
+                    <input type="checkbox" name="carrera" value="sistemas" checked onchange="buscar()">
+                    <span class="label-texto">Ing. de Sistemas</span>
+                    <span class="conteo">2</span>
+                </label>
+                <label class="filtro-opcion">
+                    <input type="checkbox" name="carrera" value="industrial" checked onchange="buscar()">
+                    <span class="label-texto">Ing. Industrial</span>
+                    <span class="conteo">1</span>
+                </label>
+                <label class="filtro-opcion">
+                    <input type="checkbox" name="carrera" value="civil" checked onchange="buscar()">
+                    <span class="label-texto">Ing. Civil</span>
+                    <span class="conteo">2</span>
+                </label>
+                <label class="filtro-opcion">
+                    <input type="checkbox" name="carrera" value="arquitectura" checked onchange="buscar()">
+                    <span class="label-texto">Arquitectura</span>
+                    <span class="conteo">2</span>
+                </label>
+            </section>
+
+            <section class="filtro-grupo">
+                <h3 class="filtro-titulo">Periodo Académico</h3>
+                <label class="filtro-opcion radio">
+                    <input type="radio" name="fecha" value="reciente" onchange="buscar()">
+                    <span class="label-texto">Último semestre (2026-I)</span>
+                </label>
+                <label class="filtro-opcion radio">
+                    <input type="radio" name="fecha" value="anio" onchange="buscar()">
+                    <span class="label-texto">Último año (2026)</span>
+                </label>
+                <label class="filtro-opcion radio">
+                    <input type="radio" name="fecha" value="todos" checked onchange="buscar()">
+                    <span class="label-texto">Todos los años</span>
+                </label>
+            </section>
+
+            <section class="filtro-grupo">
+                <h3 class="filtro-titulo">Herramientas de Investigación</h3>
+                <div class="herramientas-grid">
+                    <a href="https://www.grammarly.com/" class="btn-herramienta" target="_blank" rel="noopener"><span>✍️</span> Grammarly</a>
+                    <a href="https://www.zotero.org/" class="btn-herramienta" target="_blank" rel="noopener"><span>📚</span> Zotero</a>
+                    <a href="https://www.mendeley.com/" class="btn-herramienta" target="_blank" rel="noopener"><span>📑</span> Mendeley</a>
+                    <a href="https://ieeexplore.ieee.org/" class="btn-herramienta" target="_blank" rel="noopener"><span>🏛️</span> IEEE Xplore</a>
+                </div>
+            </section>
+        </aside>
+
+        <main class="contenido-resultados">
+
+            <header class="resultados-header">
+                <div>
+                    <h1 class="termino-busqueda">Resultados para: <span id="texto-criterio">Todos los proyectos</span></h1>
+                    <p class="info-resultados" id="conteo-resultados">Mostrando 7 proyectos encontrados</p>
+                </div>
+            </header>
+
+            <div id="mensaje-no-encontrado" class="estado-vacio" style="display: none;">
+                <div class="icono-vacio">📂</div>
+                <h3>No se encontraron proyectos</h3>
+                <p>Intenta con otras palabras clave o desmarca algunos filtros en el panel lateral.</p>
+            </div>
+
+            <!-- Contenedor de tarjetas (se llena con JS para paginación) -->
+            <div id="contenedor-tarjetas"></div>
+
+            <!-- Paginación -->
+            <nav class="paginacion" id="paginacion" aria-label="Navegación de páginas"></nav>
+
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>© 2026 Portal de Proyectos | Universidad de San Martín de Porres</p>
+    </footer>
+
+    <script>
+        // ========== DATOS DE TODOS LOS PROYECTOS ==========
+        const todosLosProyectos = [
+            {
+                id: 1,
+                carrera: "sistemas",
+                semestre: "2026-I",
+                fecha: "2026-05",
+                titulo: "Implementación de LLMs Cuantizados para la Automatización de Trámites en Entidades Públicas Peruanas",
+                tipo: "Tesis de Pregrado",
+                descripcion: "Modernización de la gestión pública mediante modelos de lenguaje open-source (Llama y Mistral) cuantizados a 4 bits, ejecutables on-premise para proteger datos de ciudadanos.",
+                fechaTexto: "14 de Mayo, 2026",
+                autores: "Rodrigo Paredes & Luciana Vega",
+                imagen: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80"
+            },
+                {
+            id: 2,
+            carrera: "industrial",
+            semestre: "2026-II",
+            fecha: "2026-08",
+            titulo: "Sistema de Visión por Computadora para Control de Calidad en Líneas de Envasado Agroindustrial",
+            tipo: "Proyecto de Investigación",
+            descripcion: "Banco de inspección automatizado con YOLOv8 y Nvidia Jetson para detectar defectos de sellado y calibración en líneas de envasado a 120 unidades por minuto.",
+            fechaTexto: "28 de Agosto, 2026",
+            autores: "Mateo Sotomayor & Valeria Rivas",
+            imagen: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80"
+             },  
+            {
+                id: 3,
+                carrera: "sistemas",
+                semestre: "2026-II",
+                fecha: "2026-10",
+                titulo: "Algoritmo Predictivo de Fuga de Tráfico de Red y Mitigación de Ataques DDoS en Topologías SDN",
+                tipo: "Proyecto de Fin de Carrera",
+                descripcion: "Redes neuronales LSTM integradas en controladores SDN para anticipar picos anómalos de tráfico y mitigar ataques DDoS con reglas de bloqueo en menos de 450 ms.",
+                fechaTexto: "03 de Octubre, 2026",
+                autores: "Diego Alejandro Morales",
+                imagen: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 4,
+                carrera: "civil",
+                semestre: "2026-I",
+                fecha: "2026-04",
+                titulo: "Análisis Sísmico de Edificios de Concreto Armado con Aisladores de Base en Lima Metropolitana",
+                tipo: "Tesis de Pregrado",
+                descripcion: "Evaluación del comportamiento dinámico de estructuras de 8 a 15 pisos con aisladores elastoméricos. Se utilizaron modelos en ETABS y registros de sismos peruanos.",
+                fechaTexto: "22 de Abril, 2026",
+                autores: "Camila Quispe & Andrés Mendoza",
+                imagen: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 5,
+                carrera: "civil",
+                semestre: "2026-II",
+                fecha: "2026-09",
+                titulo: "Diseño de Pavimentos Flexibles con Materiales Reciclados para Vías Urbanas de Tráfico Medio",
+                tipo: "Proyecto de Investigación",
+                descripcion: "Propuesta de mezcla asfáltica con 20% de RAP (pavimento reciclado) y aditivos poliméricos. Ensayos Marshall y evaluación de fatiga en laboratorio.",
+                fechaTexto: "12 de Septiembre, 2026",
+                autores: "Jorge Salazar & Patricia Núñez",
+                imagen: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 6,
+                carrera: "arquitectura",
+                semestre: "2026-I",
+                fecha: "2026-06",
+                titulo: "Vivienda Social Sostenible con Criterios de Arquitectura Bioclimática en la Costa Peruana",
+                tipo: "Tesis de Pregrado",
+                descripcion: "Prototipo de vivienda de interés social con ventilación cruzada, techos verdes y materiales locales. Simulaciones térmicas con DesignBuilder.",
+                fechaTexto: "05 de Junio, 2026",
+                autores: "Valeria Torres & Renato Castillo",
+                imagen: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80"
+            },
+            {
+                id: 7,
+                carrera: "arquitectura",
+                semestre: "2026-II",
+                fecha: "2026-11",
+                titulo: "Rehabilitación Patrimonial y Adaptación Funcional del Centro Histórico de Lima con BIM",
+                tipo: "Proyecto de Fin de Carrera",
+                descripcion: "Modelo BIM de un inmueble colonial para su conversión en centro cultural. Análisis de interven­ción mínima y criterios de conservación.",
+                fechaTexto: "18 de Noviembre, 2026",
+                autores: "Sofía Ramírez & Luis Felipe Ortega",
+                imagen: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=500&q=80"
+            }
+        ];
+
+        // ========== CONFIGURACIÓN DE PAGINACIÓN ==========
+        const POR_PAGINA = 3;
+        let paginaActual = 1;
+        let proyectosFiltrados = [...todosLosProyectos];
+
+        // ========== RENDERIZAR UNA TARJETA ==========
+        function crearTarjeta(p) {
+            const carreraLabel = {
+                sistemas: "Ing. Sistemas",
+                industrial: "Ing. Industrial",
+                civil: "Ing. Civil",
+                arquitectura: "Arquitectura"
+            };
+
+            return `
+            <article class="tarjeta-proyecto">
+                <div class="tarjeta-imagen">
+                    <a href="resultado.html?id=${p.id}">
+                        <img src="${p.imagen}" alt="${p.titulo}">
+                    </a>
+                </div>
+                <div class="tarjeta-cuerpo">
+                    <div class="tarjeta-tags">
+                        <span class="tag tag-rojo">${carreraLabel[p.carrera]}</span>
+                        <span class="tag tag-gris">${p.tipo}</span>
+                    </div>
+                    <h2 class="tarjeta-titulo">
+                        <a href="resultado.html?id=${p.id}">${p.titulo}</a>
+                    </h2>
+                    <p class="tarjeta-descripcion">${p.descripcion}</p>
+                    <div class="tarjeta-footer">
+                        <span class="meta-item">📅 ${p.fechaTexto}</span>
+                        <span class="meta-item">👤 ${p.autores}</span>
+                        <a href="resultado.html?id=${p.id}" class="enlace-ver">Ver proyecto &rarr;</a>
+                    </div>
+                </div>
+            </article>`;
+        }
+
+        // ========== RENDERIZAR PÁGINA ACTUAL ==========
+        function renderizar() {
+            const contenedor = document.getElementById('contenedor-tarjetas');
+            const mensaje = document.getElementById('mensaje-no-encontrado');
+            const conteoEl = document.getElementById('conteo-resultados');
+            const paginacionEl = document.getElementById('paginacion');
+
+            const total = proyectosFiltrados.length;
+            const totalPaginas = Math.ceil(total / POR_PAGINA) || 1;
+
+            // Ajustar página si se queda fuera de rango
+            if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+            if (paginaActual < 1) paginaActual = 1;
+
+            const inicio = (paginaActual - 1) * POR_PAGINA;
+            const fin = inicio + POR_PAGINA;
+            const paginaProyectos = proyectosFiltrados.slice(inicio, fin);
+
+            // Tarjetas
+            if (total === 0) {
+                contenedor.innerHTML = '';
+                mensaje.style.display = 'block';
+                conteoEl.textContent = 'No se hallaron coincidencias';
+                paginacionEl.innerHTML = '';
+                return;
+            }
+
+            mensaje.style.display = 'none';
+            contenedor.innerHTML = paginaProyectos.map(crearTarjeta).join('');
+            conteoEl.textContent = `Mostrando ${total} proyecto${total !== 1 ? 's' : ''} encontrado${total !== 1 ? 's' : ''} (página ${paginaActual} de ${totalPaginas})`;
+
+            // Paginación
+            let htmlPag = '';
+            htmlPag += `<a href="#" class="btn-pagina ${paginaActual === 1 ? 'deshabilitado' : ''}" 
+                            onclick="cambiarPagina(${paginaActual - 1}); return false;">&laquo; Anterior</a>`;
+
+            for (let i = 1; i <= totalPaginas; i++) {
+                if (totalPaginas > 5 && Math.abs(i - paginaActual) > 1 && i !== 1 && i !== totalPaginas) {
+                    if (i === 2 || i === totalPaginas - 1) htmlPag += `<span class="puntos">...</span>`;
+                    continue;
+                }
+                htmlPag += `<a href="#" class="btn-pagina ${i === paginaActual ? 'activo' : ''}" 
+                                onclick="cambiarPagina(${i}); return false;">${i}</a>`;
+            }
+
+            htmlPag += `<a href="#" class="btn-pagina ${paginaActual === totalPaginas ? 'deshabilitado' : ''}" 
+                            onclick="cambiarPagina(${paginaActual + 1}); return false;">Siguiente &raquo;</a>`;
+
+            paginacionEl.innerHTML = htmlPag;
+        }
+
+        function cambiarPagina(n) {
+            const totalPaginas = Math.ceil(proyectosFiltrados.length / POR_PAGINA) || 1;
+            if (n < 1 || n > totalPaginas) return;
+            paginaActual = n;
+            renderizar();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ========== FILTROS + BÚSQUEDA ==========
+        function buscar() {
+            const texto = document.getElementById('input-busqueda').value.trim().toLowerCase();
+            const carrerasChecked = Array.from(document.querySelectorAll('input[name="carrera"]:checked')).map(c => c.value);
+            const periodo = document.querySelector('input[name="fecha"]:checked')?.value || 'todos';
+
+            document.getElementById('texto-criterio').textContent = texto ? `"${texto}"` : 'Todos los proyectos';
+
+            proyectosFiltrados = todosLosProyectos.filter(p => {
+                const coincideTexto = !texto ||
+                    p.titulo.toLowerCase().includes(texto) ||
+                    p.descripcion.toLowerCase().includes(texto) ||
+                    p.autores.toLowerCase().includes(texto);
+
+                const coincideCarrera = carrerasChecked.length === 0 || carrerasChecked.includes(p.carrera);
+
+                let coincidePeriodo = true;
+                if (periodo === 'reciente') coincidePeriodo = p.semestre === '2026-I';
+                else if (periodo === 'anio') coincidePeriodo = p.fecha.startsWith('2026');
+
+                return coincideTexto && coincideCarrera && coincidePeriodo;
+            });
+
+            paginaActual = 1; // volver a la primera página al filtrar
+            renderizar();
+        }
+
+        function limpiarFiltros() {
+            document.getElementById('input-busqueda').value = '';
+            document.querySelectorAll('input[name="carrera"]').forEach(c => c.checked = true);
+            document.querySelector('input[name="fecha"][value="todos"]').checked = true;
+            buscar();
+        }
+
+        // Eventos
+        document.getElementById('input-busqueda').addEventListener('keypress', e => {
+            if (e.key === 'Enter') buscar();
+        });
+
+        // Scroll hide/show buscador
+        let ultimaPosicion = 0;
+        const buscadorWrapper = document.querySelector('.buscador-wrapper');
+        window.addEventListener('scroll', () => {
+            const pos = window.scrollY;
+            if (pos > ultimaPosicion && pos > 90) buscadorWrapper.classList.add('oculto');
+            else buscadorWrapper.classList.remove('oculto');
+            ultimaPosicion = pos;
+        });
+
+        // Inicio
+        document.addEventListener('DOMContentLoaded', buscar);
+    </script>
+</body>
+</html>

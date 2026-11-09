@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pagina-titulo">Detalle del Proyecto | USMP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/estilorel.css">
+    <style>
+        /* Estilos de la ficha de detalle */
+        .detalle-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .btn-volver {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--color-primary, #9b111e);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.2s;
+        }
+        .btn-volver:hover {
+            color: var(--color-primary-hover, #7b0d18);
+            text-decoration: underline;
+        }
+
+        .detalle-card {
+            background: var(--bg-surface, #fff);
+            border: 1px solid var(--border-light, #e2e8f0);
+            border-radius: var(--radius-lg, 16px);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.06));
+        }
+
+        .detalle-header {
+            padding: 1.75rem 2rem 1rem;
+        }
+
+        .detalle-header h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin: 0.75rem 0 0.5rem;
+            color: var(--text-main, #0f172a);
+        }
+
+        .imagen-principal {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .panel-autores {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: #f8fafc;
+            border-top: 1px solid var(--border-light, #e2e8f0);
+            border-bottom: 1px solid var(--border-light, #e2e8f0);
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+        }
+        .panel-autores span {
+            display: block;
+            color: var(--text-subtle, #94a3b8);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.15rem;
+        }
+        .panel-autores strong {
+            color: var(--text-main, #0f172a);
+        }
+
+        .seccion-detalle {
+            padding: 1.5rem 2rem;
+        }
+        .seccion-detalle h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--text-main, #0f172a);
+        }
+        .seccion-detalle p {
+            color: var(--text-muted, #475569);
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+
+        .galeria-secundaria {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.75rem;
+        }
+        .galeria-secundaria img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid var(--border-light, #e2e8f0);
+        }
+
+        .acciones-descarga {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            padding: 1.5rem 2rem 2rem;
+            border-top: 1px solid var(--border-light, #e2e8f0);
+        }
+
+        .boton-secundario-link {
+            color: var(--color-primary, #9b111e);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .boton-secundario-link:hover {
+            text-decoration: underline;
+        }
+
+        .logo-link {
+            font-weight: 700;
+            color: var(--text-main, #0f172a);
+            text-decoration: none;
+            font-size: 1.05rem;
+        }
+        .logo-link:hover {
+            color: var(--color-primary, #9b111e);
+        }
+
+        @media (max-width: 640px) {
+            .detalle-header h1 { font-size: 1.3rem; }
+            .galeria-secundaria { grid-template-columns: 1fr; }
+            .panel-autores { flex-direction: column; gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="buscador-wrapper">
+        <div class="buscador-container">
+            <a href="parte 2,1.html" class="logo-link">
+                ← Portal de Proyectos USMP
+            </a>
+        </div>
+    </header>
+
+    <div class="detalle-container">
+        <a href="parte 2,1.html" class="btn-volver">&larr; Volver a los resultados de búsqueda</a>
+
+        <article class="detalle-card" id="contenedor-proyecto">
+            <!-- Contenido dinámico -->
+        </article>
+    </div>
+
+    <script>
+        const proyectos = {
+    "1": {
+        titulo: "Implementación de LLMs Cuantizados para la Automatización de Trámites en Entidades Públicas Peruanas",
+        carrera: "Ing. de Sistemas",
+        tipo: "Tesis de Pregrado",
+        metodologia: "NLP / Transformers / LoRA",
+        fecha: "14 de Mayo, 2026",
+        autores: "Rodrigo Paredes Huamán & Luciana Vega Cárdenas",
+        asesor: "Dr. Carlos Benavides Estrada (FIA - USMP)",
+        facultad: "Facultad de Ingeniería y Arquitectura",
+        imagenHero: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
+        imagenSecundaria1: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=600&q=80",
+        imagenSecundaria2: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80",
+        resumen: "Este proyecto aborda la modernización de la gestión pública mediante el despliegue de modelos de lenguaje basados en arquitecturas open-source (Llama y Mistral). Se implementó un esquema de cuantización a 4 bits que permite su ejecución en servidores on-premise sin comprometer datos confidenciales de los ciudadanos.",
+        resultados: "El prototipo logró procesar expedientes administrativos reduciendo el tiempo medio de clasificación de 45 minutos a 12 segundos por documento, alcanzando una exactitud del 93.4% en la extracción de metadatos normativos según el marco de interoperabilidad peruano."
+    },
+   "2": {
+        titulo: "Sistema de Visión por Computadora para Control de Calidad en Líneas de Envasado Agroindustrial",
+        carrera: "Ing. Industrial",
+        tipo: "Proyecto de Investigación",
+        metodologia: "Computer Vision / YOLOv8 / Edge Computing",
+        fecha: "28 de Agosto, 2026",
+        autores: "Mateo Sotomayor Quispe & Valeria Rivas Tapia",
+        asesor: "Mg. Elena Gómez Mendoza (Círculo de Mejora Continua)",
+        facultad: "Facultad de Ingeniería y Arquitectura",
+        imagenHero: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+        imagenSecundaria1: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80",
+        imagenSecundaria2: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNM1eiZZhniupGoZnFB2-9bHsf5VoySUBoTbdFvMrGC4u2CZpAnRcRbuzL&s=10",
+        resumen: "Desarrollo de un banco de inspección automatizado para el sector agroindustrial. Utilizando cámaras de alta velocidad y dispositivos Nvidia Jetson, el sistema examina defectos de sellado y calibración geométrica de frutos en líneas de envasado a un flujo continuo de 120 unidades por minuto.",
+        resultados: "Se redujo el índice de falsos rechazos en un 42% y se eliminó la fatiga visual de los inspectores en turno nocturno, proporcionando telemetría en tiempo real sobre mermas por lote."
+    },
+    "3": {
+        titulo: "Algoritmo Predictivo de Fuga de Tráfico de Red y Mitigación de Ataques DDoS en Topologías SDN",
+        carrera: "Ing. de Sistemas",
+        tipo: "Proyecto de Fin de Carrera",
+        metodologia: "Deep Learning / LSTM / OpenFlow",
+        fecha: "03 de Octubre, 2026",
+        autores: "Diego Alejandro Morales Rios",
+        asesor: "Ing. Walter Zavaleta Polo (Lab. Redes y Ciberseguridad)",
+        facultad: "Facultad de Ingeniería y Arquitectura",
+        imagenHero: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
+        imagenSecundaria1: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+        imagenSecundaria2: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=600&q=80",
+        resumen: "Integración de redes neuronales recurrentes (LSTM) en controladores de Redes Definidas por Software para anticipar picos anómalos de tráfico y mitigar vectores de saturación volumétrica.",
+        resultados: "El algoritmo demostró una tasa de detección temprana del 96.2% con tiempos de inyección de reglas de bloqueo en switches de borde menores a 450 milisegundos."
+    },
+    "4": {
+        titulo: "Análisis Sísmico de Edificios de Concreto Armado con Aisladores de Base en Lima Metropolitana",
+        carrera: "Ing. Civil",
+        tipo: "Tesis de Pregrado",
+        metodologia: "Análisis Dinámico / ETABS / Aislación Sísmica",
+        fecha: "22 de Abril, 2026",
+        autores: "Camila Quispe Rojas & Andrés Mendoza Vargas",
+        asesor: "Dr. Fernando Alarcón Ruiz (Lab. Estructuras)",
+        facultad: "Facultad de Ingeniería y Arquitectura",
+        imagenHero: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80",
+        imagenSecundaria1: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80",
+        imagenSecundaria2: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=600&q=80",
+        resumen: "Evaluación del comportamiento dinámico de estructuras de 8 a 15 pisos con aisladores elastoméricos. Se utilizaron modelos no lineales en ETABS y registros de sismos peruanos para verificar la reducción de aceleraciones y derivas de entrepiso.",
+        resultados: "Se logró una reducción promedio del 65% en las aceleraciones de piso y una mejora significativa en la capacidad de disipación de energía, cumpliendo los límites del Reglamento Nacional de Edificaciones."
+    },
+    "5": {
+        titulo: "Diseño de Pavimentos Flexibles con Materiales Reciclados para Vías Urbanas de Tráfico Medio",
+        carrera: "Ing. Civil",
+        tipo: "Proyecto de Investigación",
+        metodologia: "Ensayos Marshall / RAP / Diseño de Mezclas",
+        fecha: "12 de Septiembre, 2026",
+        autores: "Jorge Salazar Huamán & Patricia Núñez Castro",
+        asesor: "Mg. Ricardo Paredes Soto (Lab. de Materiales)",
+        facultad: "Facultad de Ingeniería y Arquitectura",
+        imagenHero: "https://images.unsplash.com/photo-1581094271901-8022df4466f9?auto=format&fit=crop&w=1200&q=80",
+        imagenSecundaria1: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80",
+        imagenSecundaria2: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80",
+        resumen: "Propuesta de mezcla asfáltica con 20% de RAP (pavimento reciclado) y aditivos poliméricos. Se realizaron ensayos Marshall, de fatiga y módulo resiliente en laboratorio para validar su uso en vías urbanas de tráfico medio.",
+        resultados: "La mezcla con 20% RAP alcanzó valores de estabilidad Marshall superiores a 12 kN y una resistencia a la fatiga comparable a mezclas vírgenes, reduciendo el costo de material en aproximadamente 18%."
+    },
+    "6": {
+        titulo: "Vivienda Social Sostenible con Criterios de Arquitectura Bioclimática en la Costa Peruana",
+        carrera: "Arquitectura",
+        tipo: "Tesis de Pregrado",
+        metodologia: "Diseño Bioclimático / DesignBuilder / Materiales Locales",
+        fecha: "05 de Junio, 2026",
+        autores: "Valeria Torres Mendoza & Renato Castillo Ríos",
+        asesor: "Arq. María Elena Vargas (Taller de Sostenibilidad)",
+        facultad: "Facultad de Ingeniería y Arquitectura",
+        imagenHero: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+        imagenSecundaria1: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80",
+        imagenSecundaria2: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=600&q=80",
+        resumen: "Prototipo de vivienda de interés social con ventilación cruzada, techos verdes y materiales locales. Se realizaron simulaciones térmicas con DesignBuilder para validar el confort térmico en clima cálido-húmedo de la costa.",
+        resultados: "El prototipo redujo la demanda de refrigeración en un 38% respecto a una vivienda convencional y mantuvo temperaturas interiores dentro del rango de confort el 82% del año."
+    },
+    "7": {
+        titulo: "Rehabilitación Patrimonial y Adaptación Funcional del Centro Histórico de Lima con BIM",
+        carrera: "Arquitectura",
+        tipo: "Proyecto de Fin de Carrera",
+        metodologia: "BIM / Conservación Patrimonial / Intervención Mínima",
+        fecha: "18 de Noviembre, 2026",
+        autores: "Sofía Ramírez Quispe & Luis Felipe Ortega Díaz",
+        asesor: "Arq. Jorge Luis Medina (Taller de Patrimonio)",
+        facultad: "Facultad de Ingeniería y Arquitectura",
+        imagenHero: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80",
+        imagenSecundaria1: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=600&q=80",
+        imagenSecundaria2: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80",
+        resumen: "Modelo BIM de un inmueble colonial del Centro Histórico de Lima para su conversión en centro cultural. Se aplicaron criterios de intervención mínima y se generó documentación as-built y de proyecto en Revit.",
+        resultados: "Se obtuvo un modelo BIM LOD 350 que permitió detectar interferencias estructurales y reducir el tiempo de documentación en un 40% respecto a métodos tradicionales."
+    }
+};
+
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const proyectoId = urlParams.get('id') || "1";
+        const data = proyectos[proyectoId];
+        const contenedor = document.getElementById('contenedor-proyecto');
+
+        if (data) {
+            document.getElementById('pagina-titulo').innerText = `${data.titulo} | USMP`;
+
+            contenedor.innerHTML = `
+                <div class="detalle-header">
+                    <div class="tarjeta-tags">
+                        <span class="tag tag-rojo">${data.carrera}</span>
+                        <span class="tag tag-gris">${data.tipo}</span>
+                        <span class="tag tag-metodologia">${data.metodologia}</span>
+                    </div>
+                    <h1>${data.titulo}</h1>
+                    <p class="info-resultados">Publicado el ${data.fecha} &bull; ${data.facultad}</p>
+                </div>
+
+                <img src="${data.imagenHero}" alt="${data.titulo}" class="imagen-principal">
+
+                <div class="panel-autores">
+                    <div>
+                        <span>Autor(es) del Proyecto:</span>
+                        <strong>${data.autores}</strong>
+                    </div>
+                    <div>
+                        <span>Asesor Metodológico:</span>
+                        <strong>${data.asesor}</strong>
+                    </div>
+                </div>
+
+                <section class="seccion-detalle">
+                    <h3>Resumen del Proyecto</h3>
+                    <p>${data.resumen}</p>
+                </section>
+
+                <section class="seccion-detalle">
+                    <h3>Resultados y Métricas Obtenidas</h3>
+                    <p>${data.resultados}</p>
+                </section>
+
+                <section class="seccion-detalle">
+                    <h3>Evidencia Visual y Arquitectura</h3>
+                    <div class="galeria-secundaria">
+                        <img src="${data.imagenSecundaria1}" alt="Detalle de implementación 1">
+                        <img src="${data.imagenSecundaria2}" alt="Detalle de implementación 2">
+                    </div>
+                </section>
+
+                <div class="acciones-descarga">
+                    <button class="buscador-btn" onclick="alert('Descargando archivo oficial en formato PDF...')">📥 Descargar Tesis en PDF</button>
+                    <a href="parte 2,1.html" class="boton-secundario-link">Volver al catálogo</a>
+                </div>
+            `;
+        } else {
+            contenedor.innerHTML = `
+                <div class="estado-vacio" style="padding: 3rem 1.5rem; text-align: center;">
+                    <div class="icono-vacio">🔍</div>
+                    <h3>Proyecto no encontrado</h3>
+                    <p>El identificador de proyecto no existe o ha sido movido del repositorio.</p>
+                    <br>
+                    <a href="parte 2,1.html" class="buscador-btn">Regresar al buscador</a>
+                </div>
+            `;
+        }
+        
+    </script>
+</body>
+</html>

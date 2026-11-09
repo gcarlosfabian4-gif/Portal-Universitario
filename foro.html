@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foro Simple</title>
+  <link rel="stylesheet" href="estilos/estilo2.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Foro de la Comunidad</h1>
+      <p>Comparte tus ideas y lee lo que otros piensan</p>
+    </header>
+
+    <!-- Formulario para publicar -->
+    <div class="form-card">
+      <h2>Escribe un comentario</h2>
+      <form id="commentForm">
+        <div class="form-group">
+          <label for="name">Tu nombre</label>
+          <input type="text" id="name" placeholder="Ej: Ana López" required maxlength="40">
+        </div>
+        <div class="form-group">
+          <label for="message">Mensaje</label>
+          <textarea id="message" placeholder="Escribe tu comentario aquí..." required maxlength="1000"></textarea>
+        </div>
+        <button type="submit">Publicar comentario</button>
+      </form>
+    </div>
+
+    <!-- Lista de comentarios -->
+    <div class="comments-section">
+      <h2>
+        Comentarios
+        <span class="comment-count" id="commentCount">0</span>
+      </h2>
+      <div class="comments-list" id="commentsList">
+        <!-- Los comentarios se insertan aquí con JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('commentForm');
+    const nameInput = document.getElementById('name');
+    const messageInput = document.getElementById('message');
+    const commentsList = document.getElementById('commentsList');
+    const commentCount = document.getElementById('commentCount');
+
+    // Cargar comentarios guardados
+    let comments = JSON.parse(localStorage.getItem('foroComentarios')) || [];
+
+    function saveComments() {
+      localStorage.setItem('foroComentarios', JSON.stringify(comments));
+    }
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleString('es-ES', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    function renderComments() {
+      commentsList.innerHTML = '';
+
+      if (comments.length === 0) {
+        commentsList.innerHTML = `
+          <div class="empty-state">
+            <p>Aún no hay comentarios. ¡Sé el primero en escribir!</p>
+          </div>
+        `;
+        commentCount.textContent = '0';
+        return;
+      }
+
+      // Mostrar del más reciente al más antiguo
+      comments.slice().reverse().forEach((comment, index) => {
+        const realIndex = comments.length - 1 - index;
+        const div = document.createElement('div');
+        div.className = 'comment';
+        div.innerHTML = `
+          <div class="comment-header">
+            <span class="comment-author">${escapeHtml(comment.name)}</span>
+            <span class="comment-date">${formatDate(comment.date)}</span>
+          </div>
+          <div class="comment-body">${escapeHtml(comment.message)}</div>
+          <button class="delete-btn" onclick="deleteComment(${realIndex})">Eliminar</button>
+        `;
+        commentsList.appendChild(div);
+      });
+
+      commentCount.textContent = comments.length;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function deleteComment(index) {
+      if (confirm('¿Estás seguro de que quieres eliminar este comentario?')) {
+        comments.splice(index, 1);
+        saveComments();
+        renderComments();
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = nameInput.value.trim();
+      const message = messageInput.value.trim();
+
+      if (!name || !message) return;
+
+      comments.push({
+        name: name,
+        message: message,
+        date: new Date().toISOString()
+      });
+
+      saveComments();
+      renderComments();
+
+      // Limpiar formulario
+      nameInput.value = '';
+      messageInput.value = '';
+      nameInput.focus();
+    });
+
+    // Renderizar al cargar la página
+    renderComments();
+  </script>
+</body>
+</html>

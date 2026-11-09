@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cronograma de entregas del portal de Proyectos USMP">
+  <title>Cronogramas | Proyectos USMP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos/cronogramas.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">✦</span>
+        <span>Proyectos USMP</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="index.html#recursos">Recursos</a>
+        <a href="#">Especialidades</a>
+        <a href="#" class="active">Comunidad / Foro</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-shape shape-1"></div>
+    <div class="hero-shape shape-2"></div>
+    <div class="hero-shape shape-3"></div>
+    <div class="hero-content">
+      <div class="hero-badge">📅 Semestre 2026-II</div>
+      <h1>Cronograma de Entregas</h1>
+      <p>Fechas oficiales, rúbricas y plazos clave para que presentes tu proyecto sin sorpresas.</p>
+      <div class="hero-actions">
+        <a href="#timeline" class="btn btn-white">Ver timeline</a>
+        <a href="#subir" class="btn btn-outline">Subir entrega</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="progress-card" aria-label="Progreso del semestre">
+      <div class="progress-info">
+        <h2>Progreso del semestre</h2>
+        <p>Actualmente en la etapa de <strong>Propuesta de proyecto</strong></p>
+        <div class="progress-bar-wrap"><div class="progress-bar"></div></div>
+      </div>
+      <div class="progress-percent">0%</div>
+    </section>
+
+    <section aria-labelledby="upload-title">
+      <div class="section-header" id="subir">
+        <h2 id="upload-title"><span>📤</span> Subir entrega</h2>
+      </div>
+
+      <div class="upload-card">
+        <label class="upload-zone" id="uploadZone" for="fileInput">
+          <span class="upload-icon">📁</span>
+          <strong>Arrastra tus archivos aquí</strong>
+          <span>o haz clic para seleccionar</span>
+          <small class="upload-hint">PDF, DOCX, ZIP o PPTX · Máx. 15 MB por archivo · Hasta 3 archivos</small>
+          <input type="file" id="fileInput" multiple
+            accept=".pdf,.docx,.zip,.pptx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/zip,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+        </label>
+
+        <div class="file-list" id="fileList" aria-live="polite"></div>
+        <div class="upload-messages" id="uploadMessages" aria-live="polite"></div>
+
+        <div class="upload-actions">
+          <button type="button" class="btn-upload" id="btnUpload" disabled>Enviar entrega</button>
+          <button type="button" class="btn-clear" id="btnClear" hidden>Limpiar</button>
+        </div>
+        <p class="upload-note">Nota: esta demostración valida los archivos en el navegador, pero todavía no los guarda en un servidor.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="timeline-title">
+      <div class="section-header section-spaced" id="timeline">
+        <h2 id="timeline-title"><span>🚀</span> Línea de tiempo oficial</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item completed">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="card-top">
+              <h3 class="card-title">Kick-off &amp; Inducción</h3>
+              <span class="badge badge-done">Completado</span>
+            </div>
+            <div class="card-date">📆 10 – 14 de marzo 2026</div>
+            <p class="card-desc">Presentación del curso, reglas, herramientas y formación de equipos.</p>
+            <div class="card-meta"><span>👥 Todos los alumnos</span><span>📍 Virtual / Presencial</span></div>
+          </div>
+        </article>
+
+        <article class="timeline-item current">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="card-top">
+              <h3 class="card-title">Propuesta de Proyecto</h3>
+              <span class="badge badge-current">En curso</span>
+            </div>
+            <div class="card-date">📆 Fecha límite: 28 de marzo 2026</div>
+            <p class="card-desc">Entrega del documento de propuesta (alcance, objetivos, metodología y cronograma preliminar). Se evalúa con rúbrica oficial.</p>
+            <div class="card-meta"><span>📄 Documento PDF</span><span>⭐ 15% de la nota</span></div>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="card-top">
+              <h3 class="card-title">Avance 1 – 30%</h3>
+              <span class="badge badge-upcoming">Próximo</span>
+            </div>
+            <div class="card-date">📆 Fecha límite: 2 de mayo 2026</div>
+            <p class="card-desc">Primer avance técnico: estado del arte, diseño preliminar y prototipo inicial (si aplica).</p>
+            <div class="card-meta"><span>📊 Informe + Demo</span><span>⭐ 20% de la nota</span></div>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="card-top">
+              <h3 class="card-title">Avance 2 – 60%</h3>
+              <span class="badge badge-upcoming">Próximo</span>
+            </div>
+            <div class="card-date">📆 Fecha límite: 6 de junio 2026</div>
+            <p class="card-desc">Segundo avance con resultados parciales, validaciones y mejoras respecto al avance anterior.</p>
+            <div class="card-meta"><span>📊 Informe + Demo</span><span>⭐ 25% de la nota</span></div>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-card">
+            <div class="card-top">
+              <h3 class="card-title">Entrega Final + Sustentación</h3>
+              <span class="badge badge-upcoming">Próximo</span>
+            </div>
+            <div class="card-date">📆 27 de junio – 4 de julio 2026</div>
+            <p class="card-desc">Informe final completo, repositorio, video demo y sustentación oral ante el jurado.</p>
+            <div class="card-meta"><span>🎓 Evaluación final</span><span>⭐ 40% de la nota</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="tips-title">
+      <div class="section-header section-spaced">
+        <h2 id="tips-title"><span>💡</span> Consejos para no fallar</h2>
+      </div>
+      <div class="tips">
+        <article class="tip-card">
+          <div class="tip-icon red">⏰</div>
+          <h3>Anticípate 48 horas</h3>
+          <p>Sube tu entrega al menos 2 días antes. Evita problemas de plataforma o conexión de último minuto.</p>
+        </article>
+        <article class="tip-card">
+          <div class="tip-icon orange">📋</div>
+          <h3>Revisa la rúbrica</h3>
+          <p>Cada entregable tiene una rúbrica específica. Léela antes de empezar a trabajar.</p>
+        </article>
+        <article class="tip-card">
+          <div class="tip-icon blue">🔄</div>
+          <h3>Versiona tu trabajo</h3>
+          <p>Usa Git o carpetas numeradas. Nunca pierdas una versión anterior importante.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="download-bar" id="descargas">
+      <div>
+        <h3>¿Necesitas el cronograma completo?</h3>
+        <p>Descarga el PDF oficial con todas las fechas, rúbricas y lineamientos.</p>
+      </div>
+      <a href="#" class="btn-download">⬇️ Descargar Cronograma PDF</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        Portal de Proyectos USMP
+        <span>Espacio colaborativo de ingeniería, tecnología e investigación aplicada.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Foro de consultas</a>
+        <a href="#">Documentación</a>
+        <a href="#">Políticas de autoría</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="estilos/cronogramas.js"></script>
+</body>
+</html>
